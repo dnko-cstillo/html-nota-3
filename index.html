@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portal de ventas - Novidecor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+      :root { --royal-blue: #4169E1; }
+      .text-royal { color: var(--royal-blue); }
+      .btn-primary { background-color: var(--royal-blue); border-color: var(--royal-blue); }
+      .btn-primary:hover { background-color: #3a5cc0; border-color: #3a5cc0; }
+      h2 { color: var(--royal-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+      .btn-custom { background-color: var(--royal-blue); border-color: var(--royal-blue); color: white; font-weight: 500; }
+      .btn-custom:hover { background-color: #3a5cc0; border-color: #3a5cc0; color: white; }
+      body { background: linear-gradient(135deg, #000000, #001f3f, #0a2351); background-attachment: fixed; color: #f1f1f1; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+      .card { background-color: rgba(255, 255, 255, 0.1); border: none; backdrop-filter: blur(6px); color: white; transition: transform 0.3s; }
+      .card:hover { transform: translateY(-5px); }
+      .card .card-body { background: rgba(0, 0, 0, 0.2); border-radius: 0 0 10px 10px; }
+      .carousel-item-proportional { height: 250px; }
+      .carousel-item-proportional img { height: 100%; width: 100%; object-fit: cover; object-position: center; border-radius: 8px; }
+      .carousel-item-proportional.slide-contain img { object-fit: contain; }
+      @media (min-width: 768px) { .carousel-item-proportional { height: 450px; } }
+      #seccionDestacados, #seccionPodriainteresarte { background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 40px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); margin: 20px auto; }
+      footer { background: #000814; margin-top: auto; }
+      .navbar-brand .fw-bold { color: #fff; }
+      #cart-counter { display: none; font-size: 0.75rem; padding: 2px 5px; border-radius: 50%; position: relative; top: -8px; left: 2px; }
+      .card-img-top { width: 100%; height: 250px; object-fit: contain; background-color: #fff; padding: 15px; border-radius: 10px 10px 0 0; }
+      
+      .contact-box {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        height: 100%;
+        color: #fff;
+      }
+      .form-control-custom {
+        background-color: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+      }
+      .form-control-custom:focus {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-color: var(--royal-blue);
+        color: #fff;
+        box-shadow: 0 0 0 0.25rem rgba(65, 105, 225, 0.25);
+      }
+      .form-control-custom::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+          <a class="navbar-brand d-flex align-items-center" href="index.html"><span class="fw-bold text-white">NOVI<span class="text-royal">DECOR</span></span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="bi bi-tags me-1"></i> Categorías</a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="espumas.html">Espumas</a></li>
+                  <li><a class="dropdown-item" href="telas.html">Telas Muebles</a></li>
+                  <li><a class="dropdown-item" href="implementos.html">Implementos</a></li>
+                </ul>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#ReservaHora"><i class="bi bi-calendar-check me-1"></i> Contacto</a></li>
+              <li class="nav-item" id="nav-cuenta"><a class="nav-link" href="login.html"><i class="bi bi-person me-1"></i> Cuenta</a></li>
+              <li class="nav-item"><a class="nav-link" href="carrito.html"><i class="bi bi-cart me-1"></i> Carrito <span class="badge bg-danger" id="cart-counter">0</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <section id="seccionBienvenida">
+      <div class="container-fluid p-0">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active carousel-item-proportional"><img src="img/frente a la tienda.jpg" class="d-block w-100" alt="Fachada"></div>
+            <div class="carousel-item carousel-item-proportional"><img src="img/atendiendo.jpg" class="d-block w-100" alt="Atención"></div>
+            <div class="carousel-item carousel-item-proportional slide-contain"><img src="img/mision.jpg" class="d-block w-100" alt="Misión"></div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+        </div>              
+      </div>  
+    </section>
+
+    <section id="seccionDestacados" class="py-5">
+      <div class="container text-center">
+        <h2 class="mb-4">Productos Destacados</h2> 
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img src="img/espuma-alta.webp" class="card-img-top" alt="Espuma alta densidad">
+              <div class="card-body">
+                <h5 class="card-title">Espuma Alta Densidad</h5><p class="card-text fw-bold">$12.990</p>
+                <button class="btn btn-primary btn-add-to-cart" data-id="1" data-name="Espuma Alta Densidad" data-price="12990" data-img="img/espuma-alta.webp"><i class="bi bi-cart-plus me-1"></i> Agregar</button>
+                <a href="producto.html?id=1" class="btn btn-outline-light ms-3"><i class="bi bi-eye me-1"></i> Detalles</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img src="img/tela-lino.webp" class="card-img-top" alt="Tela lino">
+              <div class="card-body">
+                <h5 class="card-title">Tela Lino Antimanchas</h5><p class="card-text fw-bold">$8.990</p>
+                <button class="btn btn-primary btn-add-to-cart" data-id="2" data-name="Tela Lino Antimanchas" data-price="8990" data-img="img/tela-lino.webp"><i class="bi bi-cart-plus me-1"></i> Agregar</button>
+                <a href="producto.html?id=2" class="btn btn-outline-light ms-3"><i class="bi bi-eye me-1"></i> Detalles</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img src="img/pegamento.webp" class="card-img-top" alt="Pegamento">
+              <div class="card-body">
+                <h5 class="card-title">Pegamento tapicero 3lts</h5><p class="card-text fw-bold">$9.990</p>
+                <button class="btn btn-primary btn-add-to-cart" data-id="3" data-name="Pegamento tapicero 3lts" data-price="9990" data-img="img/pegamento.webp"><i class="bi bi-cart-plus me-1"></i> Agregar</button>
+                <a href="producto.html?id=3" class="btn btn-outline-light ms-3"><i class="bi bi-eye me-1"></i> Detalles</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="seccionPodriainteresarte" class="py-5">
+      <div class="container text-center">
+        <h2 class="mb-4">Podría Interesarte</h2> 
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img src="img/espuma-media.webp" class="card-img-top" alt="Espuma media">
+              <div class="card-body">
+                <h5 class="card-title">Espuma Densidad Media</h5><p class="card-text fw-bold">$8.990</p>
+                <button class="btn btn-primary btn-add-to-cart" data-id="7" data-name="Espuma Densidad Media" data-price="8990" data-img="img/espuma-media.webp"><i class="bi bi-cart-plus me-1"></i> Agregar</button>
+                <a href="producto.html?id=7" class="btn btn-outline-light ms-3"><i class="bi bi-eye me-1"></i> Detalles</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img src="img/tachuelas.jpg" class="card-img-top" alt="Tachuelas">
+              <div class="card-body">
+                <h5 class="card-title">Tachuelas Decorativas</h5><p class="card-text fw-bold">$4.990</p>
+                <button class="btn btn-primary btn-add-to-cart" data-id="6" data-name="Tachuelas Decorativas" data-price="4990" data-img="img/tachuelas.jpg"><i class="bi bi-cart-plus me-1"></i> Agregar</button>
+                <a href="producto.html?id=6" class="btn btn-outline-light ms-3"><i class="bi bi-eye me-1"></i> Detalles</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img src="img/corchetes-80.webp" class="card-img-top" alt="Corchetes">
+              <div class="card-body">
+                <h5 class="card-title">Corchetes 80/10 (Caja 5000)</h5><p class="card-text fw-bold">$7.990</p>
+                <button class="btn btn-primary btn-add-to-cart" data-id="9" data-name="Corchetes 80/10 (Caja 5000)" data-price="7990" data-img="img/corchetes-80.webp"><i class="bi bi-cart-plus me-1"></i> Agregar</button>
+                <a href="producto.html?id=9" class="btn btn-outline-light ms-3"><i class="bi bi-eye me-1"></i> Detalles</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ReservaHora" class="py-5">
+  <div class="container">
+    <h2 class="mb-5 text-center text-uppercase fw-bold">Contáctanos</h2>
+    
+    <div class="row g-4">
+      
+      <div class="col-lg-6">
+        <div class="contact-box">
+          <h3 class="mb-3 text-center"><i class="bi bi-calendar-check text-royal me-2"></i>Reserva tu Hora</h3>
+          <p class="text-center mb-4 text-white-50">
+            Agenda tu visita presencial. Recibirás confirmación a tu correo.
+          </p>
+          
+          <form action="https://formspree.io/f/mgvrwwdg" method="POST">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control form-control-custom" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control form-control-custom" id="email" name="email" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control form-control-custom" id="telefono" name="telefono" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" class="form-control form-control-custom" id="fecha" name="fecha" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="hora" class="form-label">Hora Preferida</label>
+                <input type="time" class="form-control form-control-custom" id="hora" name="hora" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="motivo" class="form-label">Motivo de la Visita</label>
+              <textarea class="form-control form-control-custom" id="motivo" name="motivo" rows="2" placeholder="Describa brevemente..."></textarea>
+            </div>
+
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-primary w-100 fw-bold">
+                Reservar Cita
+              </button>
+            </div>
+          </form>
+        </div>
+      </div> 
+
+      <div class="col-lg-6">
+        <div class="contact-box">
+          <h3 class="mb-3 text-center"><i class="bi bi-envelope-paper text-royal me-2"></i>Envíanos un Mensaje</h3>
+          <p class="text-center mb-4 text-white-50">
+            ¿Dudas sobre stock o envíos? Escríbenos directamente.
+          </p>
+          
+          <div class="d-flex justify-content-center gap-4 mb-4">
+            <div class="text-center">
+              <a href="mailto:ipvgnovidecor@mail.com" class="text-decoration-none" style="color: inherit;">
+                <i class="bi bi-envelope-fill text-primary fs-4 d-block"></i>
+                <small>ipvgnovidecor@mail.com</small>
+              </a>
+            </div>
+            <div class="text-center">
+              <a href="https://www.instagram.com/ipvgnovidecor" target="_blank" class="text-decoration-none" style="color: inherit;">
+                <i class="bi bi-instagram text-danger fs-4 d-block"></i>
+                <small>@ipvgnovidecor</small>
+              </a>
+            </div>
+          </div>
+          <form action="https://formspree.io/f/mgvrwwdg" method="POST">
+            <div class="mb-3">
+              <label class="form-label">Tu Correo</label>
+              <input type="email" class="form-control form-control-custom" name="email" placeholder="nombre@ejemplo.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Asunto</label>
+              <input type="text" class="form-control form-control-custom" name="asunto" placeholder="Consulta sobre telas..." required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mensaje</label>
+              <textarea class="form-control form-control-custom" name="mensaje" rows="5" placeholder="Escribe tu consulta aquí..." required></textarea>
+            </div>
+            <div class="text-center mt-auto">
+              <button type="submit" class="btn btn-outline-light w-100 fw-bold">
+                <i class="bi bi-send me-2"></i> Enviar Mensaje
+              </button>
+            </div>
+          </form>
+        </div>
+      </div> 
+      
+    </div> 
+  </div>
+</section>
+    
+    <footer class="text-white py-4"><div class="container text-center"><p class="mb-0">&copy; 2025 NOVIDECOR. Todos los derechos reservados.</p></div></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.getElementById("reservaForm")?.addEventListener("submit", function(e) {
+        e.preventDefault(); 
+        Swal.fire({ title: "¡Reserva enviada!", icon: "success", confirmButtonColor: "#4169E1" });
+      });
+    </script>
+    <script src="scripts/auth.js" defer></script>
+    <script src="scripts/cart.js" defer></script>
+  </body>
+</html>
